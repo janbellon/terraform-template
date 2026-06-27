@@ -1,4 +1,10 @@
-# Enpos Terraform Repository
+# Sample terraform repository for VM deployement
+
+**Infrastructure components used**
+- Proxmox
+- Netbox
+- PowerDNS
+- Vault / OpenBao
 
 **Quick start**
 1. Clone the repository
@@ -6,20 +12,16 @@
 git clone https://gitlab.enpos.fr/enpos/admin/terraform/proxmox terraform
 cd terraform
 ```
-If you have already cloned the repository, you can pull the latest changes
-```bash
-git pull origin main
-```
 2. Edit the following files with correct data
 - `locals.tf`
 - `providers.tf`
 - `versions.tf`
 
-3. Create virtual_machines.yaml
+3. Create the virtual machines file
 ```bash
-cp virtual_machines.yaml.sample virtual_machines.yaml
+vim virtual_machines.yaml
 ```
-Edit the file with desired vms.
+Add your virtual machines, you can use the structure of vm1 as a template.
 
 4. Apply changes
 ```bash
@@ -50,7 +52,7 @@ terraform apply
 
 ```bash
 export VAULT_TOKEN=s.yourtoken
-export VAULT_ADDR=https://vault.network.lan
+export VAULT_ADDR=https://vault.example.lan
 vault login s.yourtoken
 vault policy write terraform terraform-policy.hcl
 vault token create -policy="terraform" -ttl=8760
